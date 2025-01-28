@@ -34,13 +34,14 @@ map.on('click', async function(e) {
 // 2. RECHERCHE PAR NOM DE VILLE
 async function searchCity() {
     const cityInput = document.getElementById('city-input');
+  
     const city = cityInput.value.trim();
 
     if (!city) {
         alert('Veuillez entrer une ville');
         return;
     }
-
+  
     try {
         // Obtenir les coordonnées depuis le nom de la ville
         const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${city}`);
@@ -73,6 +74,7 @@ function displayWeather(city, lat, lon) {
     const weatherInfo = document.getElementById('weather-info');
 
     // Simulation des données météo (à remplacer par une vraie API météo)
+
     const weatherData = {
         temperature: Math.floor(Math.random() * 30),
         condition: ['Ensoleillé', 'Nuageux', 'Pluvieux', 'Venteux'][Math.floor(Math.random() * 4)],
@@ -81,7 +83,7 @@ function displayWeather(city, lat, lon) {
         pressure: Math.floor(Math.random() * 100) + 950,
         feelsLike: Math.floor(Math.random() * 30)
     };
-
+  
     // Déterminer l'icône météo
     const weatherIcons = {
         'Ensoleillé': 'fa-sun',
