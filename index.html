@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Météo</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="weather-section">
+            <div class="search-container">
+                <input type="text" id="city-input" placeholder="Rechercher une ville...">
+                <button onclick="getWeather()">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            
+            <div id="weather-info" class="weather-card">
+                <!-- Les informations météo seront affichées ici -->
+            </div>
+
+            <div class="forecast-container">
+                <!-- Les prévisions seront affichées ici -->
+            </div>
+        </div>
+
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
