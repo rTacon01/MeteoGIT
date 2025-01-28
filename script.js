@@ -1,3 +1,4 @@
+
 // Initialiser la carte
 let map = L.map('map').setView([48.866667, 2.333333], 4);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
