@@ -10,6 +10,14 @@ body {
     min-height: 100vh;
     padding: 2rem;
 }
+.weather-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 1rem;
+}
+
 
 .main-container {
     display: grid;

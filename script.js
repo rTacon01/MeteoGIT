@@ -73,8 +73,7 @@ async function searchCity() {
 function displayWeather(city, lat, lon) {
     const weatherInfo = document.getElementById('weather-info');
 
-    // Simulation des données météo (à remplacer par une vraie API météo)
-
+    // Simulation des données météo actuelles (à remplacer par une vraie API météo)
     const weatherData = {
         temperature: Math.floor(Math.random() * 30),
         condition: ['Ensoleillé', 'Nuageux', 'Pluvieux', 'Venteux'][Math.floor(Math.random() * 4)],
@@ -83,8 +82,7 @@ function displayWeather(city, lat, lon) {
         pressure: Math.floor(Math.random() * 100) + 950,
         feelsLike: Math.floor(Math.random() * 30)
     };
-  
-    // Déterminer l'icône météo
+
     const weatherIcons = {
         'Ensoleillé': 'fa-sun',
         'Nuageux': 'fa-cloud',
@@ -92,7 +90,6 @@ function displayWeather(city, lat, lon) {
         'Venteux': 'fa-wind'
     };
 
-    // Afficher les informations
     weatherInfo.innerHTML = `
         <h2>${city}</h2>
         <div class="coordinates">
@@ -122,17 +119,17 @@ function displayWeather(city, lat, lon) {
         </div>
     `;
 
-    // Afficher les prévisions
+    // Générer les prévisions météo
     displayForecast();
 }
 
-// Fonction pour afficher les prévisions
+// Afficher les prévisions météo interactives
 function displayForecast() {
     const forecastContainer = document.querySelector('.forecast-container');
     forecastContainer.innerHTML = '';
-    
-    // Simuler 5 jours de prévisions
-    for(let i = 1; i <= 5; i++) {
+    forecastData = [];
+
+    for (let i = 1; i <= 5; i++) {
         const temp = Math.floor(Math.random() * 30);
         const condition = ['Ensoleillé', 'Nuageux', 'Pluvieux', 'Venteux'][Math.floor(Math.random() * 4)];
         const icon = {
@@ -141,23 +138,50 @@ function displayForecast() {
             'Pluvieux': 'fa-cloud-rain',
             'Venteux': 'fa-wind'
         }[condition];
-        
-        forecastContainer.innerHTML += `
-            <div class="forecast-item">
-                <div>J+${i}</div>
-                <i class="fas ${icon}"></i>
-                <div>${temp}°C</div>
-            </div>
+
+        forecastData.push({ day: `J+${i}`, temp, condition });
+
+        const forecastItem = document.createElement('div');
+        forecastItem.classList.add('forecast-item');
+        forecastItem.innerHTML = `
+            <div>${forecastData[i - 1].day}</div>
+            <i class="fas ${icon}"></i>
+            <div>${temp}°C</div>
         `;
+
+        forecastItem.addEventListener('click', function() {
+            updateWeatherDetails(forecastData[i - 1]);
+        });
+
+        forecastContainer.appendChild(forecastItem);
     }
 }
 
-// Gérer la recherche avec la touche Enter
+// Met à jour la météo principale avec la prévision sélectionnée
+function updateWeatherDetails(forecast) {
+    const weatherInfo = document.getElementById('weather-info');
+
+    const weatherIcons = {
+        'Ensoleillé': 'fa-sun',
+        'Nuageux': 'fa-cloud',
+        'Pluvieux': 'fa-cloud-rain',
+        'Venteux': 'fa-wind'
+    };
+
+    weatherInfo.innerHTML = `
+        <h2>${forecast.day}</h2>
+        <i class="fas ${weatherIcons[forecast.condition] || 'fa-sun'} weather-icon"></i>
+        <div class="temperature">${forecast.temp}°C</div>
+        <div class="condition">${forecast.condition}</div>
+    `;
+}
+
+// Gestion de la recherche avec la touche "Enter"
 document.getElementById('city-input').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
         searchCity();
     }
 });
 
-// Gérer le clic sur le bouton de recherche
+// Gestion du clic sur le bouton de recherche
 document.querySelector('button').onclick = searchCity;
